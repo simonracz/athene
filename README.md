@@ -1,4 +1,4 @@
-athene
+Athene
 ======
 
-My sandbox for algorithms and data structures
+My sandbox for algorithms and data structures.
