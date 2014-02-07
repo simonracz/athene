@@ -1,4 +1,4 @@
-set(SORTING_HEADERS bubble_sort.hpp)
+set(SORTING_HEADERS bubble_sort.hpp insertion_sort.hpp)
 
 get_filename_component(DIRNAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
