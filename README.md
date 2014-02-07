@@ -1,10 +1,11 @@
+![facepalm](facepalm_statue.jpg)
 Athene
 ======
 
-My sandbox for algorithms, data structures and other stuff.
+My sandbox for algorithms, data structures and a bunch of other stuff.
 
 ## Building
-It uses cmake, so you can probably use your favorite IDE. http://www.cmake.org
+The project uses cmake. So you can browse and build the code in your favorite IDE. (http://www.cmake.org)
 
 ### Example
 <pre>
@@ -13,4 +14,12 @@ athene$ cd build
  build$ cmake ..
  build$ make
  build$ make test
+</pre>
+
+OR
+
+<pre>
+athene$ mkdir build
+athene$ cd build
+ build$ cmake .. -G Xcode
 </pre>
