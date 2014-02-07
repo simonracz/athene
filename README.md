@@ -22,4 +22,5 @@ OR
 athene$ mkdir build
 athene$ cd build
  build$ cmake .. -G Xcode
+ build$ open ./ATHENE.xcodeproj
 </pre>
