@@ -1,7 +1,8 @@
 include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(${ATHENE_SOURCE_DIR}/sorting)
 
-set(TESTS bubble_test insertion_test)
+set(TESTS bubble_test insertion_test
+          merge_test )
 
 foreach (test ${TESTS})
   add_executable(sorting-${test} ${test}.cpp)

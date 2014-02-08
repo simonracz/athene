@@ -27,9 +27,12 @@ TEST(BubbleTest, random)
 {
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::mt19937 m(seed);
+	std::uniform_real_distribution<double> dist(0.0,1.0);
+	auto dice = std::bind(dist, m);
 	
-	std::vector<double> vec(100);
-	std::iota(vec.begin(), vec.end(), 1);
+	std::vector<double> vec;
+	vec.reserve(100);
+	std::generate_n(back_inserter(vec), 100, [&dice] {return dice();});
 	
 	std::shuffle(vec.begin(), vec.end(), m);
 	athene::bubble_sort(vec);

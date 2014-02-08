@@ -4,26 +4,26 @@
 #include <chrono>
 #include <numeric>
 #include <iterator>
-#include "insertion_sort.hpp"
+#include "merge_sort.hpp"
 
-TEST(InsertionTest, predefined)
+TEST(MergeTest, predefined)
 {
 	std::vector<int> vec{5,1,3,4,2};
-	athene::insertion_sort(vec);
+	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 	
 	std::fill_n(vec.begin(), 5, 10);
 	vec[0] = 100;
-	athene::insertion_sort(vec);
+	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 	
 	std::fill_n(vec.begin(), 5, -1);
 	vec[1] = 5;
-	athene::insertion_sort(vec);
+	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 }
 
-TEST(InsertionTest, random)
+TEST(MergeTest, random)
 {
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::mt19937 m(seed);
@@ -35,15 +35,15 @@ TEST(InsertionTest, random)
 	std::generate_n(back_inserter(vec), 100, [&dice] {return dice();});
 	
 	std::shuffle(vec.begin(), vec.end(), m);
-	athene::insertion_sort(vec);
+	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 	
 	std::shuffle(vec.begin(), vec.end(), m);
-	athene::insertion_sort(vec);
+	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 	
 	std::shuffle(vec.begin(), vec.end(), m);
-	athene::insertion_sort(vec);
+	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 }
 
