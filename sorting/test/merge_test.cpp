@@ -11,6 +11,7 @@ TEST(MergeTest, predefined)
 	std::vector<int> vec{5,1,3,4,2};
 	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
+	ASSERT_TRUE(vec.size() == 5);
 	
 	std::fill_n(vec.begin(), 5, 10);
 	vec[0] = 100;
@@ -37,6 +38,7 @@ TEST(MergeTest, random)
 	std::shuffle(vec.begin(), vec.end(), m);
 	athene::merge_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
+	ASSERT_TRUE(vec.size() == 100);
 	
 	std::shuffle(vec.begin(), vec.end(), m);
 	athene::merge_sort(vec);
