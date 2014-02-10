@@ -51,3 +51,12 @@ DerivedData
 
 # CocoaPods
 Pods
+
+#ctags
+tags
+
+#cscope
+cscope.files
+cscope.in.out
+cscope.out
+cscope.po.out
