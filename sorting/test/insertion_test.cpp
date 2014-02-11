@@ -35,7 +35,6 @@ TEST(InsertionTest, random)
 	vec.reserve(100);
 	std::generate_n(back_inserter(vec), 100, [&dice] {return dice();});
 	
-	std::shuffle(vec.begin(), vec.end(), m);
 	athene::insertion_sort(vec);
 	EXPECT_TRUE(std::is_sorted(vec.begin(), vec.end()));
 	ASSERT_TRUE(vec.size() == 100);

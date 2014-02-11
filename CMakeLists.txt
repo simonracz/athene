@@ -36,6 +36,8 @@ if (ATHENE_BUILD_TESTS)
   set(GTEST_BOTH_LIBRARIES ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY})
 endif()
 
+add_subdirectory(math)
+
 add_subdirectory(sorting)
 add_subdirectory(trees)
 add_subdirectory(graphs)
