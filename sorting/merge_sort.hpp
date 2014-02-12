@@ -7,6 +7,16 @@
 namespace athene {
 
 template <typename T>
+std::vector<T> merge_sort_impl(std::vector<T>&, size_t, size_t);
+
+//This is slow.
+template <typename T>
+void merge_sort(std::vector<T>& vec)
+{
+	vec = merge_sort_impl(vec, 0, vec.size() - 1);
+}
+	
+template <typename T>
 std::vector<T> merge_sort_impl(std::vector<T>& vec, size_t lower, size_t upper)
 {
 	if (lower>=upper) {
@@ -26,11 +36,35 @@ std::vector<T> merge_sort_impl(std::vector<T>& vec, size_t lower, size_t upper)
 	return ret;
 }
 
+/*
+template <typename T>
+std::tuple<std::vector<T>, typename std::vector<T>::iterator, typename std::vector<T>::iterator>
+merge_sort_impl(std::vector<T>& vec, size_t lower, size_t upper)
+{
+	if (lower>=upper) {
+		return std::make_tuple(vec, vec.begin()+lower, vec.begin()+lower);
+	}
+
+	size_t split = (upper - lower) / 2;
+
+	auto vLeft = merge_sort_impl(vec, lower, lower + split);
+	auto vRight = merge_sort_impl(vec, lower + split + 1, upper);
+
+	std::vector<T> ret;
+	ret.reserve(upper - lower + 1);
+
+	std::merge(std::get<1>(vLeft), std::get<2>(vLeft), std::get<1>(vRight), std::get<2>(vRight), back_inserter(ret));
+
+	return std::make_tuple(ret, ret.begin(), ret.end());
+}
+
 template <typename T>
 void merge_sort(std::vector<T>& vec)
 {
-	vec = merge_sort_impl(vec, 0, vec.size() - 1);
+	vec = std::get<0>(merge_sort_impl(vec, 0, vec.size() - 1));
 }
+*/
+
 	
 /*
 template <typename T>
