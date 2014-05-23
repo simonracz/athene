@@ -1,7 +1,7 @@
 include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(${ATHENE_SOURCE_DIR}/math)
 
-set(TESTS basic_math_test prime_numbers_test)
+set(TESTS basic_math_test prime_numbers_test big_int_test)
 
 foreach (test ${TESTS})
   add_executable(math-${test} ${test}.cpp)

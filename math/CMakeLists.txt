@@ -1,4 +1,4 @@
-set(MATH_HEADERS basic_math.hpp prime_numbers.hpp)
+set(MATH_HEADERS basic_math.hpp prime_numbers.hpp big_int.hpp)
 
 get_filename_component(DIRNAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 

@@ -1,4 +1,4 @@
-set(TREES_HEADERS heaps.hpp)
+set(TREES_HEADERS heap.hpp avl_tree.hpp)
 
 get_filename_component(DIRNAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
