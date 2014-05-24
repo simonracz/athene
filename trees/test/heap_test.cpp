@@ -4,7 +4,7 @@
 #include <random>
 #include <chrono>
 #include <iterator>
-#include "heaps.hpp"
+#include "heap.hpp"
 
 TEST(MakeHeapTest, random100)
 {
@@ -16,7 +16,7 @@ TEST(MakeHeapTest, random100)
 	std::vector<double> vec;
 	vec.reserve(100);
 	std::generate_n(back_inserter(vec), 100, [&dice] {return dice();});
-
+	
 	athene::make_bin_heap(vec);
 	EXPECT_TRUE(std::is_heap(vec.begin(), vec.end()));
 	ASSERT_TRUE(vec.size() == 100);

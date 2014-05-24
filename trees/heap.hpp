@@ -1,5 +1,5 @@
-#ifndef heaps_hpp
-#define heaps_hpp
+#ifndef heap_hpp
+#define heap_hpp
 
 #include <algorithm>
 #include <vector>

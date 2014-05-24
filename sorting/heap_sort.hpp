@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <algorithm>
-#include <heaps.hpp>
+#include <heap.hpp>
 
 namespace athene {
 
