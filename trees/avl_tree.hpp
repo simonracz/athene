@@ -46,6 +46,8 @@ public:
 	std::string print_backwards();
 	void read(std::string input);
 	
+	iterator get_root() {return root;}
+	
 private:
 	std::size_t mSize{0};
 	iterator root{nullptr};

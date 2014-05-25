@@ -4,6 +4,7 @@
 #include <random>
 #include <chrono>
 #include <iterator>
+#include <utility>
 #include "avl_tree.hpp"
 
 TEST(BSTreeTest, predefined1)
@@ -150,39 +151,6 @@ TEST(BSTreeTest, predefined7)
 	EXPECT_TRUE(bs.min() == 5);
 	EXPECT_TRUE(bs.max() == 10);
 }
-
-TEST(BSTreeTest, random10)
-{
-	std::vector<int> vec;
-	vec.reserve(10);
-	for (int i=0; i<10; ++i) {
-		vec.push_back(50+i*2);
-	}
-	
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::mt19937 m(seed);
-	std::shuffle(vec.begin(), vec.end(), m);
-	
-	athene::naive_bs_tree<int> bs;
-	
-	for (auto& it : vec) {
-		//std::cout << bs.print() << std::endl;
-		bs.insert(it);
-	}
-	
-	//std::cout << bs.print() << std::endl;
-	
-	EXPECT_TRUE(bs.size() == 10);
-	
-	std::shuffle(vec.begin(), vec.end(), m);
-	for (int i=0; i<3; ++i) {
-		EXPECT_TRUE(bs.erase(vec[i]));
-		//std::cout << bs.print() << std::endl;
-	}
-	
-	EXPECT_TRUE(bs.size() == 7);
-}
-
 
 TEST(BSTreeTest, random100)
 {
