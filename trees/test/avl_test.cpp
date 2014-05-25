@@ -202,6 +202,8 @@ TEST(BSTreeTest, random100)
 		bs.insert(it);
 	}
 	
+	//std::cout << bs.print_backwards() << std::endl;
+	
 	EXPECT_TRUE(bs.size() == 100);
 	EXPECT_TRUE(bs.min() == 50);
 	EXPECT_TRUE(bs.max() == 248);

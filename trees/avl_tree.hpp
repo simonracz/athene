@@ -43,6 +43,7 @@ public:
 	void clear();
 	
 	std::string print();
+	std::string print_backwards();
 	void read(std::string input);
 	
 private:
@@ -330,6 +331,21 @@ std::string naive_bs_tree<T>::print()
 	while (node!=nullptr) {
 		str << "," << node->val;
 		node = next(node);
+	}
+	str << "}";
+	return str.str();
+}
+template<class T>
+std::string naive_bs_tree<T>::print_backwards()
+{
+	if (mSize == 0) return "{0}";
+	
+	std::stringstream str;
+	str << "{" << mSize;
+	iterator node = lastNode();
+	while (node!=nullptr) {
+		str << "," << node->val;
+		node = prev(node);
 	}
 	str << "}";
 	return str.str();
