@@ -28,7 +28,7 @@ public:
 	
 	iterator insert(const T& val);
 	iterator find(const T& val);
-	void erase(const T& val);
+	bool erase(const T& val);
 	T& min();
 	T& max();
 	
@@ -53,11 +53,11 @@ private:
 	bool is_left_of_parent(iterator node);
 	bool is_right_of_parent(iterator node);
 	
-	iterator min_impl(iterator root);
-	iterator max_impl(iterator root);
+	iterator min_impl(iterator node);
+	iterator max_impl(iterator node);
 	
 	iterator find_node(const T& val);
-	iterator find_node_impl(iterator root, const T& val);
+	iterator find_node_impl(iterator node, const T& val);
 };
 
 template<class T>
@@ -100,22 +100,22 @@ naive_bs_tree<T>::find_node(const T& val)
 
 template<class T>
 typename naive_bs_tree<T>::iterator
-naive_bs_tree<T>::find_node_impl(iterator root, const T& val)
+naive_bs_tree<T>::find_node_impl(iterator node, const T& val)
 {
-	if (root->val == val) return root;
+	if (node->val == val) return node;
 	
-	if (root->val > val) {
-		if (has_left(root)) {
-			return find_node_impl(root->left, val);
+	if (node->val > val) {
+		if (has_left(node)) {
+			return find_node_impl(node->left, val);
 		} else {
-			return root;
+			return node;
 		}
 	}
 	
-	if (has_right(root)) {
-		return find_node_impl(root->right, val);
+	if (has_right(node)) {
+		return find_node_impl(node->right, val);
 	}
-	return root;
+	return node;
 }
 template<class T>
 bool naive_bs_tree<T>::has_left(iterator node)
@@ -159,21 +159,21 @@ T& naive_bs_tree<T>::max()
 }
 template<class T>
 typename naive_bs_tree<T>::iterator
-naive_bs_tree<T>::min_impl(iterator root)
+naive_bs_tree<T>::min_impl(iterator node)
 {
-	while(has_left(root)) {
-		root = root->left;
+	while(has_left(node)) {
+		node = node->left;
 	}
-	return root;
+	return node;
 }
 template<class T>
 typename naive_bs_tree<T>::iterator
-naive_bs_tree<T>::max_impl(iterator root)
+naive_bs_tree<T>::max_impl(iterator node)
 {
-	while(has_right(root)) {
-		root = root->right;
+	while(has_right(node)) {
+		node = node->right;
 	}
-	return root;
+	return node;
 }
 template<class T>
 typename naive_bs_tree<T>::iterator
@@ -197,29 +197,26 @@ naive_bs_tree<T>::insert(const T& val)
 		return root;
 	}
 	
-	iterator node = find_node(val);
+	Node* node = find_node(val);
 	if (node->val == val) return node;
-	
+
+	Node* newNode = new Node(val);
+	newNode->parent = node;
 	if (node->val < val) {
-		iterator newNode = new Node(val);
-		newNode->parent = node;
 		node->right = newNode;
-		++mSize;
-		return newNode;
+	} else {
+		node->left = newNode;
 	}
 	
-	iterator newNode = new Node(val);
-	newNode->parent = node;
-	node->left = newNode;
 	++mSize;
 	return newNode;
 }
 template<class T>
-void naive_bs_tree<T>::erase(const T& val)
+bool naive_bs_tree<T>::erase(const T& val)
 {
-	if (mSize == 0) return;
+	if (mSize == 0) return false;
 	iterator node = find_node(val);
-	if (node->val != val) return;
+	if (node->val != val) return false;
 	iterator p = node->parent;
 	
 	if (!node->left && !node->right) {
@@ -234,7 +231,7 @@ void naive_bs_tree<T>::erase(const T& val)
 		}
 		delete node;
 		--mSize;
-		return;
+		return true;
 	}
 	
 	if (!node->left) {
@@ -251,7 +248,7 @@ void naive_bs_tree<T>::erase(const T& val)
 		}
 		delete node;
 		--mSize;
-		return;
+		return true;
 	}
 	
 	if (!node->right) {
@@ -268,11 +265,12 @@ void naive_bs_tree<T>::erase(const T& val)
 		}
 		delete node;
 		--mSize;
-		return;
+		return true;
 	}
 	
 	iterator m = max_impl(node->left);
 	iterator mp = m->parent;
+	iterator mLeft = m->left;
 	if (!p) {
 		root = m;
 		m->parent = nullptr;
@@ -289,12 +287,13 @@ void naive_bs_tree<T>::erase(const T& val)
 	if (m != node->left) {
 		m->left = node->left;
 		m->left->parent = m;
+		mp->right = mLeft;
+		if (mLeft) mLeft->parent = mp;
 	}
-	mp->right = nullptr;
 	
 	delete node;
 	--mSize;
-	return;
+	return true;
 }
 template<class T>
 typename naive_bs_tree<T>::iterator
@@ -373,7 +372,8 @@ void naive_bs_tree<T>::read(std::string input)
 	}
 }
 	
-	
+}
+
 /*
 template<class T>
 class avl_tree {
@@ -481,6 +481,5 @@ public:
 };
  */
 
-}
 
 #endif
